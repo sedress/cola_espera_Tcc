@@ -52,34 +52,70 @@ class MMkResultScreen extends StatelessWidget {
     final l = lq + (lambda / mu);
 
     final graphData = [
-      {'name': 'Prob. Sistema Vacío', 'value': p0},
-      {'name': 'Lq (Longitud Cola)', 'value': lq},
-      {'name': 'Wq (Tiempo Espera en Cola)', 'value': wq},
-      {'name': 'L (Clientes en Sistema)', 'value': l},
+      {'name': 'P0', 'value': p0},
+      {'name': 'Lq', 'value': lq},
+      {'name': 'Wq', 'value': wq},
+      {'name': 'L', 'value': l},
     ];
 
     return Scaffold(
-      appBar: AppBar(title: Text('Resultados del Modelo M/M/k')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            MetricContainer('Probabilidad de Sistema Vacío (P0)', p0, 'Es la probabilidad de que todos los servidores estén desocupados.'),
-            MetricContainer('Longitud Promedio de la Cola (Lq)', lq, 'El número promedio de clientes esperando en la cola para ser atendidos.'),
-            MetricContainer('Tiempo Promedio de Espera en la Cola (Wq)', wq, 'El tiempo promedio que un cliente espera en la cola antes de ser atendido.'),
-            MetricContainer('Número de Clientes en el Sistema (L)', l, 'El número promedio de clientes en el sistema.'),
-            SizedBox(height: 20),
-            SfCartesianChart(
-              primaryXAxis: CategoryAxis(),
-              series: <ChartSeries>[
-                ColumnSeries<Map<String, dynamic>, String>(
-                  dataSource: graphData,
-                  xValueMapper: (data, _) => data['name'],
-                  yValueMapper: (data, _) => data['value'],
-                ),
-              ],
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: Text('Resultados del Modelo M/M/k'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: Stack(
+        children: [
+          _AnimatedBackground(),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  MetricContainer('Probabilidad de Sistema Vacío (P0)', p0, 'Es la probabilidad de que todos los servidores estén desocupados.'),
+                  MetricContainer('Longitud Promedio de la Cola (Lq)', lq, 'El número promedio de clientes esperando en la cola para ser atendidos.'),
+                  MetricContainer('Tiempo Promedio de Espera en la Cola (Wq)', wq, 'El tiempo promedio que un cliente espera en la cola antes de ser atendido.'),
+                  MetricContainer('Número de Clientes en el Sistema (L)', l, 'El número promedio de clientes en el sistema.'),
+                  SizedBox(height: 20),
+                  Expanded(
+                    child: SfCartesianChart(
+                      primaryXAxis: CategoryAxis(),
+                      series: <ChartSeries>[
+                        ColumnSeries<Map<String, dynamic>, String>(
+                          dataSource: graphData,
+                          xValueMapper: (data, _) => data['name'],
+                          yValueMapper: (data, _) => data['value'],
+                          color: Colors.white70, // Matching the color scheme
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AnimatedBackground extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFF1a2a6c), Color(0xFF2a4858)],
+        ),
+      ),
+      child: Center(
+        child: Container(
+          color: Colors.transparent,
         ),
       ),
     );

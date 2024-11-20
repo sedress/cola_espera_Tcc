@@ -9,7 +9,7 @@ class ModeloSeleccionScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          _ParticleBackground(),
+          _AnimatedBackground(),  // Usa el fondo animado
           SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -41,14 +41,13 @@ class ModeloSeleccionScreen extends StatelessWidget {
     );
   }
 
-  // Método para agregar el logo debajo del texto
   Widget _buildUniversityLogo() {
     return Container(
       padding: EdgeInsets.all(16),
       child: Column(
         children: [
           Image.asset(
-            'assets/images/university_logo.png',  // Ruta de la imagen del logo
+            'assets/images/university_logo.png',
             height: 250,
             width: 250,
           ),
@@ -57,7 +56,6 @@ class ModeloSeleccionScreen extends StatelessWidget {
     );
   }
 
-  // Método para agregar la descripción de la aplicación debajo del logo
   Widget _buildContextDescription() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20),
@@ -200,7 +198,8 @@ class _AnimatedModelButton extends StatelessWidget {
   }
 }
 
-class _ParticleBackground extends StatelessWidget {
+// Reuso el fondo animado de los otros screens
+class _AnimatedBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -211,34 +210,11 @@ class _ParticleBackground extends StatelessWidget {
           colors: [Color(0xFF1a2a6c), Color(0xFF2a4858)],
         ),
       ),
-      child: LoopAnimationBuilder<double>(
-        duration: Duration(seconds: 3),
-        tween: Tween(begin: 0.0, end: 1.0),  // Arreglado el uso de Tween
-        builder: (context, value, child) {
-          return CustomPaint(
-            painter: ParticlePainter(value),
-          );
-        },
+      child: Center(
+        child: Container(
+          color: Colors.transparent,
+        ),
       ),
     );
   }
-}
-
-class ParticlePainter extends CustomPainter {
-  final double value;
-
-  ParticlePainter(this.value);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = Colors.white.withOpacity(0.5);
-    for (int i = 0; i < 20; i++) {
-      final dx = (size.width * (i / 20)) + (value * 100);
-      final dy = size.height * (i % 2 == 0 ? 0.3 : 0.7);
-      canvas.drawCircle(Offset(dx, dy), 5, paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
