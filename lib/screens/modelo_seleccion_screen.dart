@@ -9,14 +9,14 @@ class ModeloSeleccionScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          _AnimatedBackground(),  // Usa el fondo animado
+          _AnimatedBackground(),
           SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 _buildHeader(),
-                _buildUniversityLogo(),  // Agregado el logo debajo del encabezado
-                _buildContextDescription(),  // Descripción de la aplicación debajo del logo
+                _buildUniversityLogo(),
+                _buildContextDescription(),
                 Expanded(child: _buildModelButtons(context)),
               ],
             ),
@@ -198,7 +198,7 @@ class _AnimatedModelButton extends StatelessWidget {
   }
 }
 
-// Reuso el fondo animado de los otros screens
+
 class _AnimatedBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

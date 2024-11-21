@@ -51,7 +51,7 @@ class MM1ResultScreen extends StatelessWidget {
                           dataSource: graphData,
                           xValueMapper: (data, _) => data['name'],
                           yValueMapper: (data, _) => data['value'],
-                          color: Colors.white70, // Matching the color scheme
+                          color: Colors.white70,
                         ),
                       ],
                     ),

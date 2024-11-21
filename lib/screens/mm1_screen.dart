@@ -135,7 +135,7 @@ class _AnimatedInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(
-      opacity: 1.0, // Adjust the opacity or make it animate as needed
+      opacity: 1.0,
       duration: Duration(milliseconds: 800),
       child: Transform.translate(
         offset: Offset(0, 0),
@@ -175,7 +175,7 @@ class _AnimatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedScale(
-      scale: 1.0, // Adjust the scale animation as needed
+      scale: 1.0,
       duration: Duration(milliseconds: 500),
       child: ElevatedButton(
         onPressed: onPressed,

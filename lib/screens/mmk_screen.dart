@@ -175,7 +175,7 @@ class _AnimatedButton extends StatelessWidget {
         onPressed: onPressed,
         child: child,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.green.withOpacity(0.8), // Cambiar a verde
+          backgroundColor: Colors.green.withOpacity(0.8),
           foregroundColor: Colors.white,
           padding: EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
